@@ -1,1 +1,55 @@
-<htm>Hello</htm>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown Timer</title>
+    <style>
+        #timer {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        #timesUp {
+            display: none;
+            width: 200px;
+            height: 100px;
+            background-color: red;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            line-height: 100px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <button id="startBtn">Start Timer</button>
+    <div id="timer"></div>
+    <div id="timesUp">Times Up</div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const timerDisplay = document.getElementById('timer');
+        const timesUpBox = document.getElementById('timesUp');
+
+        startBtn.addEventListener('click', () => {
+            let timeLeft = 3 * 60; // 3 minutes in seconds
+            timesUpBox.style.display = 'none'; // Hide "Times Up" if visible
+
+            const interval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    timerDisplay.textContent = '';
+                    timesUpBox.style.display = 'block'; // Show "Times Up"
+                }
+                timeLeft--;
+            }, 1000);
+        });
+    </script>
+    https://wgreunke.github.io/simple_timer/
+</body>
+</html>
+
+
